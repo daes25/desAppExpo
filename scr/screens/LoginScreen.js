@@ -36,14 +36,7 @@ export default function LoginScreen({ navigation }) {
         <Button title="Crear Una" onPress={handleLogin} />
         <Text style={styles.smallText}>By</Text>
         <Text style={styles.subtitle}>NeoShield Inc.</Text>
-
-      </View>
-
-      
-
-      
-
-      
+      </View>      
     </View>
   );
 }
