@@ -27,10 +27,8 @@ export default function WelcomeScreen({ navigation }) {
                 />
             </View>
 
-            <View style={styles.titulo}>
-                
+            <View style={styles.titulo}>  
                 <Text style={styles.title}>SafeTweet</Text>
-
             </View>
 
             <View style={styles.footer}>
