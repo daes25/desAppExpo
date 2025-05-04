@@ -1,10 +1,10 @@
 import * as SQLite from 'expo-sqlite';
-const db = SQLite.openDatabaseAsync('app.db');
+const db = SQLite.openDatabase('app.db');
 
 export const initDB = () => {
     db.transaction(tx => {
         tx.executeSql(
-            'CREATE TABLE IF NOT EXIST tecnologias (id INTEGER PRIMARY KEY AUTOINCREMEN, name TEXT NOT NULL );'
+            'CREATE TABLE IF NOT EXISTS usuarios (id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT NOT NULL, username TEXT NOT NULL, password TEXT NOT NULL);'
         );
     });
 };

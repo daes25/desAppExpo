@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import { registrarUsuario, loginUsuario, actualizarContrasena } from '../services/usuarioService';
 
 export default function LoginScreen({ navigation }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [isRegistering, setIsRegistering] = useState(false); 
+  const [isRegistering, setIsRegistering] = useState(false);
   const [newUsername, setNewUsername] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [email, setEmail] = useState('');
@@ -12,32 +13,52 @@ export default function LoginScreen({ navigation }) {
   const [resetEmail, setResetEmail] = useState('');
   const [newResetPassword, setNewResetPassword] = useState('');
 
+  // 📍 Login usando base de datos
   const handleLogin = () => {
-    if (username === 'Xxx@gmail.com' && password === '123456') {
-      navigation.navigate('Home');
-    } else {
-      Alert.alert('Error', 'Credenciales incorrectas');
-    }
+    loginUsuario(username, password, (user) => {
+      if (user) {
+        navigation.navigate('Home');
+      } else {
+        Alert.alert('Error', 'Credenciales incorrectas');
+      }
+    });
   };
 
+  // 📍 Registro usando base de datos
   const handleRegister = () => {
     if (!email || !newUsername || !newPassword) {
       Alert.alert('Campos vacíos', 'Por favor, completa todos los campos para crear una cuenta');
       return;
     }
-    Alert.alert('Registrado', 'Tu cuenta ha sido creada con éxito');
-    setIsRegistering(false); 
+    registrarUsuario(email, newUsername, newPassword, (success) => {
+      if (success) {
+        Alert.alert('Registrado', 'Tu cuenta ha sido creada con éxito');
+        setIsRegistering(false);
+        setEmail('');
+        setNewUsername('');
+        setNewPassword('');
+      } else {
+        Alert.alert('Error', 'No se pudo registrar el usuario');
+      }
+    });
   };
 
+  // 📍 Reset de contraseña usando base de datos
   const handleResetSubmit = () => {
     if (!resetEmail || !newResetPassword) {
       Alert.alert('Campos vacíos', 'Completa ambos campos para restablecer la contraseña');
       return;
     }
-    Alert.alert('Éxito', 'Tu contraseña ha sido actualizada');
-    setIsResettingPassword(false);
-    setResetEmail('');
-    setNewResetPassword('');
+    actualizarContrasena(resetEmail, newResetPassword, (success) => {
+      if (success) {
+        Alert.alert('Éxito', 'Tu contraseña ha sido actualizada');
+        setIsResettingPassword(false);
+        setResetEmail('');
+        setNewResetPassword('');
+      } else {
+        Alert.alert('Error', 'No se encontró el usuario con ese correo');
+      }
+    });
   };
 
   return (
@@ -47,7 +68,6 @@ export default function LoginScreen({ navigation }) {
       </View>
 
       {isResettingPassword ? (
-        // Formulario de recuperación
         <View style={styles.tarjetas}>
           <TextInput
             style={styles.input}
@@ -68,7 +88,6 @@ export default function LoginScreen({ navigation }) {
           </View>
         </View>
       ) : isRegistering ? (
-        // Formulario de registro
         <View style={styles.tarjetas}>
           <TextInput
             style={styles.input}
@@ -95,7 +114,6 @@ export default function LoginScreen({ navigation }) {
           </View>
         </View>
       ) : (
-        // Formulario de inicio de sesión
         <View style={styles.tarjetas}>
           <TextInput
             style={styles.input}
