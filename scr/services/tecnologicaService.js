@@ -1,12 +1,12 @@
-import db from '../database';
+import db from '../../db/database';
 
 // Función para agregar un nuevo usuario a la base de datos
-export const agregarUsuario = (email, username, passsword, callback) => {
+export const agregarUsuario = (email, username, password, callback) => {
     db.transaction(tx => {
         tx.executeSql(
-            'INSERT INTO usuarios (email, username, passsword) VALUES (?, ?, ?);',
-            [email, username, passsword],
-            (_, result) => callback(true), 
+            'INSERT INTO usuarios (email, username, password) VALUES (?, ?, ?);',
+            [email, username, password],
+            (_, result) => callback(true),
             (_, error) => {
                 console.error(error);
                 return callback(false);
@@ -15,13 +15,19 @@ export const agregarUsuario = (email, username, passsword, callback) => {
     });
 };
 
-// Función para obtener todos los usuarios (si es necesario)
+// Función para obtener todos los usuarios
 export const obtenerUsuarios = (callback) => {
     db.transaction(tx => {
-        tx.executesSql(
+        tx.executeSql(
             'SELECT * FROM usuarios;',
             [],
-            (_, { rows }) => callback(rows._array),
+            (_, { rows }) => {
+                if (rows.length > 0) {
+                    callback(rows._array);
+                } else {
+                    callback([]);
+                }
+            },
             (_, error) => {
                 console.error(error);
                 return callback([]);
@@ -30,16 +36,22 @@ export const obtenerUsuarios = (callback) => {
     });
 };
 
-// Función para obtener un usuario por email (si es necesario para login)
+// Función para obtener un usuario por email
 export const obtenerUsuarioPorEmail = (email, callback) => {
     db.transaction(tx => {
         tx.executeSql(
             'SELECT * FROM usuarios WHERE email = ?;',
             [email],
-            (_, { rows }) => callback(rows._array),
+            (_, { rows }) => {
+                if (rows.length > 0) {
+                    callback(rows._array[0]); // Devolver solo el primer usuario encontrado
+                } else {
+                    callback(null);
+                }
+            },
             (_, error) => {
                 console.error(error);
-                return callback([]);
+                return callback(null);
             }
         );
     });

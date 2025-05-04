@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
-import { registrarUsuario, loginUsuario, actualizarContrasena } from '../services/usuarioService';
+import { obtenerUsuarioPorEmail } from '../services/tecnologicaService'; // Importar la función de servicio
 
 export default function LoginScreen({ navigation }) {
   const [username, setUsername] = useState('');
@@ -13,24 +13,29 @@ export default function LoginScreen({ navigation }) {
   const [resetEmail, setResetEmail] = useState('');
   const [newResetPassword, setNewResetPassword] = useState('');
 
-  // 📍 Login usando base de datos
   const handleLogin = () => {
-    loginUsuario(username, password, (user) => {
+    // Buscar el usuario por correo electrónico
+    obtenerUsuarioPorEmail(username, (user) => {
       if (user) {
-        navigation.navigate('Home');
+        // Verificar que la contraseña coincida
+        if (user.password === password) {
+          navigation.navigate('Home');
+        } else {
+          Alert.alert('Error', 'Contraseña incorrecta');
+        }
       } else {
-        Alert.alert('Error', 'Credenciales incorrectas');
+        Alert.alert('Error', 'Usuario no encontrado');
       }
     });
   };
 
-  // 📍 Registro usando base de datos
   const handleRegister = () => {
     if (!email || !newUsername || !newPassword) {
       Alert.alert('Campos vacíos', 'Por favor, completa todos los campos para crear una cuenta');
       return;
     }
-    registrarUsuario(email, newUsername, newPassword, (success) => {
+    // Agregar el usuario a la base de datos
+    agregarUsuario(email, newUsername, newPassword, (success) => {
       if (success) {
         Alert.alert('Registrado', 'Tu cuenta ha sido creada con éxito');
         setIsRegistering(false);
@@ -43,13 +48,12 @@ export default function LoginScreen({ navigation }) {
     });
   };
 
-  // 📍 Reset de contraseña usando base de datos
   const handleResetSubmit = () => {
     if (!resetEmail || !newResetPassword) {
       Alert.alert('Campos vacíos', 'Completa ambos campos para restablecer la contraseña');
       return;
     }
-    actualizarContrasena(resetEmail, newResetPassword, (success) => {
+    actualizarContraseña(resetEmail, newResetPassword, (success) => {
       if (success) {
         Alert.alert('Éxito', 'Tu contraseña ha sido actualizada');
         setIsResettingPassword(false);
