@@ -134,57 +134,13 @@ export default function LoginScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 20,
-    backgroundColor: '#fff'
-  },
-  titulo: {
-    marginTop: -100,
-    marginBottom: 50
-  },
-  title: {
-    fontFamily: 'times new roman',
-    fontSize: 50,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    textAlign: 'center'
-  },
-  tarjetas: {
-    marginInline: 8,
-    gap: 2
-  },
-  boton: {
-    marginInline: 8,
-    borderRadius: 10,
-    marginTop: 30,
-    gap: 7
-  },
-  input: {
-    height: 40,
-    borderWidth: 1,
-    marginBottom: 10,
-    paddingHorizontal: 10,
-    borderRadius: 10
-  },
-  smallText: {
-    fontSize: 15,
-    color: 'black',
-    textAlign: 'center',
-    fontWeight: 'bold',
-    marginBottom: 1
-  },
-  subtitle: {
-    fontSize: 23,
-    color: 'black',
-    textAlign: 'center',
-    fontWeight: 'bold',
-    marginBottom: 20
-  },
-  footer: {
-    top: '210',
-    alignItems: 'center',
-    gap: 10
-  }
+  container: { flex: 1, justifyContent: 'center', padding: 20, backgroundColor: '#fff' },
+  titulo: { marginTop: -100, marginBottom: 50 },
+  title: { fontFamily: 'times new roman', fontSize: 50, fontWeight: 'bold', marginBottom: 20, textAlign: 'center' },
+  tarjetas: { marginInline: 8, gap: 2 },
+  boton: { marginInline: 8, borderRadius: 10, marginTop: 30, gap: 7 },
+  input: { height: 40, borderWidth: 1, marginBottom: 10, paddingHorizontal: 10, borderRadius: 10 },
+  smallText: { fontSize: 15, color: 'black', textAlign: 'center', fontWeight: 'bold', marginBottom: 1 },
+  subtitle: { fontSize: 23, color: 'black', textAlign: 'center', fontWeight: 'bold', marginBottom: 20 },
+  footer: { top: '210', alignItems: 'center', gap: 10 }
 });
