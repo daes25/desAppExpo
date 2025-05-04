@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
-import { obtenerUsuarioPorEmail } from '../services/usuarios'; // Importar la función de servicio
 
 export default function LoginScreen({ navigation }) {
   const [username, setUsername] = useState('');
