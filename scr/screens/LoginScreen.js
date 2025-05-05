@@ -12,9 +12,11 @@ export default function LoginScreen({ navigation }) {
   const [resetEmail, setResetEmail] = useState('');
   const [newResetPassword, setNewResetPassword] = useState('');
 
+
+
   const handleLogin = () => {
     // Buscar el usuario por correo electrónico
-    obtenerUsuarioPorEmail(username, (user) => {
+    obtenerUsuarioPorNombre(username, (user) => {
       if (user) {
         // Verificar que la contraseña coincida
         if (user.password === password) {

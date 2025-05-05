@@ -1,6 +1,6 @@
 
 import React, { useEffect } from 'react';
-import { View, Text, Button, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 
 
 
@@ -9,7 +9,7 @@ export default function WelcomeScreen({ navigation }) {
     ///efecto de transicion entre pestañas
     useEffect(() => {
         const timeout = setTimeout(() => {
-            navigation.replace('Login'); 
+            navigation.replace('Home'); 
         }, 4500); 
 
         return () => clearTimeout(timeout); 

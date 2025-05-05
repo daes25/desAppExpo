@@ -37,11 +37,11 @@ export const obtenerUsuarios = (callback) => {
 };
 
 // Función para obtener un usuario por email
-export const obtenerUsuarioPorEmail = (email, callback) => {
+export const obtenerUsuarioPorNombre = (username, callback) => {
     db.transaction(tx => {
         tx.executeSql(
-            'SELECT * FROM usuarios WHERE email = ?;',
-            [email],
+            'SELECT * FROM usuarios WHERE username = ?;',
+            [username],
             (_, { rows }) => {
                 if (rows.length > 0) {
                     callback(rows._array[0]); // Devolver solo el primer usuario encontrado

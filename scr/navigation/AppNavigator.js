@@ -15,7 +15,7 @@ export default function AppNavigator() {
                 <Stack.Screen name="Welcome" component={WelcomeScreen}  options={{ headerShown: false }}/>
                 <Stack.Screen name="Login" component={LoginScreen}  options={{ headerShown: false }}/>
                 <Stack.Screen name="Home" component={HomeScreen}  options={{ headerShown: false }}/>
-                <Stack.Screen name="Deatil" component={DetailScreen}  options={{ headerShown: false }}/>
+                <Stack.Screen name="Detail" component={DetailScreen}  options={{ headerShown: false }}/>
             </Stack.Navigator>
         </NavigationContainer>
     );
