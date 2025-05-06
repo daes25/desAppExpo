@@ -1,22 +1,160 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  FlatList,
-  TouchableOpacity,
-  Alert,
-} from 'react-native';
-import {
-  Feather,
-  FontAwesome,
-  Ionicons,
-  AntDesign,
-  MaterialIcons,
-} from '@expo/vector-icons';
+import { View, Text, TextInput, StyleSheet, FlatList, TouchableOpacity, Alert, } from 'react-native';
+import { Feather, FontAwesome, Ionicons, AntDesign, MaterialIcons, } from '@expo/vector-icons';
 
 const initialTweets = [
+  { 
+    id: '1',
+    user: 'User.Example',
+    username: '@user.example',
+    content: 'this is an edited Tweet.\nwe’re testing it.',
+    editedAt: 'Last edited 8:55 AM · 09/01/22',
+    likes: 4,
+    liked: false,
+  },
+  {
+    id: '2',
+    user: 'User.Example',
+    username: '@user.example',
+    content: 'this is an edited Tweet.\nwe’re testing it.',
+    editedAt: 'Last edited 8:55 AM · 09/01/22',
+    likes: 4,
+    liked: false,
+  },
+
+  {
+    id: '1',
+    user: 'User.Example',
+    username: '@user.example',
+    content: 'this is an edited Tweet.\nwe’re testing it.',
+    editedAt: 'Last edited 8:55 AM · 09/01/22',
+    likes: 4,
+    liked: false,
+  },
+  {
+    id: '2',
+    user: 'User.Example',
+    username: '@user.example',
+    content: 'this is an edited Tweet.\nwe’re testing it.',
+    editedAt: 'Last edited 8:55 AM · 09/01/22',
+    likes: 4,
+    liked: false,
+  },
+
+  {
+    id: '1',
+    user: 'User.Example',
+    username: '@user.example',
+    content: 'this is an edited Tweet.\nwe’re testing it.',
+    editedAt: 'Last edited 8:55 AM · 09/01/22',
+    likes: 4,
+    liked: false,
+  },
+  {
+    id: '2',
+    user: 'User.Example',
+    username: '@user.example',
+    content: 'this is an edited Tweet.\nwe’re testing it.',
+    editedAt: 'Last edited 8:55 AM · 09/01/22',
+    likes: 4,
+    liked: false,
+  },
+
+  {
+    id: '1',
+    user: 'User.Example',
+    username: '@user.example',
+    content: 'this is an edited Tweet.\nwe’re testing it.',
+    editedAt: 'Last edited 8:55 AM · 09/01/22',
+    likes: 4,
+    liked: false,
+  },
+  {
+    id: '2',
+    user: 'User.Example',
+    username: '@user.example',
+    content: 'this is an edited Tweet.\nwe’re testing it.',
+    editedAt: 'Last edited 8:55 AM · 09/01/22',
+    likes: 4,
+    liked: false,
+  },
+
+  {
+    id: '1',
+    user: 'User.Example',
+    username: '@user.example',
+    content: 'this is an edited Tweet.\nwe’re testing it.',
+    editedAt: 'Last edited 8:55 AM · 09/01/22',
+    likes: 4,
+    liked: false,
+  },
+  {
+    id: '2',
+    user: 'User.Example',
+    username: '@user.example',
+    content: 'this is an edited Tweet.\nwe’re testing it.',
+    editedAt: 'Last edited 8:55 AM · 09/01/22',
+    likes: 4,
+    liked: false,
+  },
+
+  {
+    id: '1',
+    user: 'User.Example',
+    username: '@user.example',
+    content: 'this is an edited Tweet.\nwe’re testing it.',
+    editedAt: 'Last edited 8:55 AM · 09/01/22',
+    likes: 4,
+    liked: false,
+  },
+  {
+    id: '2',
+    user: 'User.Example',
+    username: '@user.example',
+    content: 'this is an edited Tweet.\nwe’re testing it.',
+    editedAt: 'Last edited 8:55 AM · 09/01/22',
+    likes: 4,
+    liked: false,
+  },
+
+  {
+    id: '1',
+    user: 'User.Example',
+    username: '@user.example',
+    content: 'this is an edited Tweet.\nwe’re testing it.',
+    editedAt: 'Last edited 8:55 AM · 09/01/22',
+    likes: 4,
+    liked: false,
+  },
+  {
+    id: '2',
+    user: 'User.Example',
+    username: '@user.example',
+    content: 'this is an edited Tweet.\nwe’re testing it.',
+    editedAt: 'Last edited 8:55 AM · 09/01/22',
+    likes: 4,
+    liked: false,
+  },
+
+  {
+    id: '1',
+    user: 'User.Example',
+    username: '@user.example',
+    content: 'this is an edited Tweet.\nwe’re testing it.',
+    editedAt: 'Last edited 8:55 AM · 09/01/22',
+    likes: 4,
+    liked: false,
+  },
+  {
+    id: '2',
+    user: 'User.Example',
+    username: '@user.example',
+    content: 'this is an edited Tweet.\nwe’re testing it.',
+    editedAt: 'Last edited 8:55 AM · 09/01/22',
+    likes: 4,
+    liked: false,
+  },
+
   {
     id: '1',
     user: 'User.Example',
