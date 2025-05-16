@@ -1,193 +1,46 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, FlatList, TouchableOpacity, Alert, } from 'react-native';
-import { Feather, FontAwesome, Ionicons, AntDesign, MaterialIcons, } from '@expo/vector-icons';
+import { View, Text, TextInput, StyleSheet, FlatList, TouchableOpacity, Alert } from 'react-native';
+import { Feather, FontAwesome, Ionicons, AntDesign, MaterialIcons } from '@expo/vector-icons';
 
-const initialTweets = [
-  { 
-    id: '1',
-    user: 'User.Example',
-    username: '@user.example',
-    content: 'this is an edited Tweet.\nwe’re testing it.',
-    editedAt: 'Last edited 8:55 AM · 09/01/22',
-    likes: 4,
-    liked: false,
-  },
-  {
-    id: '2',
-    user: 'User.Example',
-    username: '@user.example',
-    content: 'this is an edited Tweet.\nwe’re testing it.',
-    editedAt: 'Last edited 8:55 AM · 09/01/22',
-    likes: 4,
-    liked: false,
-  },
+const generateTweets = () => {
+  const tweets = [];
+  for (let i = 1; i <= 50; i++) {
+    tweets.push({
+      id: `${i}`,
+      user: `User${i}`,
+      username: `@user${i}`,
+      content: `Este es el tweet número ${i}. Estamos haciendo una prueba de scroll.`,
+      editedAt: `Last edited 8:55 AM · 09/01/22`,
+      likes: Math.floor(Math.random() * 100),
+      liked: false,
+    });
+  }
+  return tweets;
+};
 
-  {
-    id: '1',
-    user: 'User.Example',
-    username: '@user.example',
-    content: 'this is an edited Tweet.\nwe’re testing it.',
-    editedAt: 'Last edited 8:55 AM · 09/01/22',
-    likes: 4,
-    liked: false,
-  },
-  {
-    id: '2',
-    user: 'User.Example',
-    username: '@user.example',
-    content: 'this is an edited Tweet.\nwe’re testing it.',
-    editedAt: 'Last edited 8:55 AM · 09/01/22',
-    likes: 4,
-    liked: false,
-  },
-
-  {
-    id: '1',
-    user: 'User.Example',
-    username: '@user.example',
-    content: 'this is an edited Tweet.\nwe’re testing it.',
-    editedAt: 'Last edited 8:55 AM · 09/01/22',
-    likes: 4,
-    liked: false,
-  },
-  {
-    id: '2',
-    user: 'User.Example',
-    username: '@user.example',
-    content: 'this is an edited Tweet.\nwe’re testing it.',
-    editedAt: 'Last edited 8:55 AM · 09/01/22',
-    likes: 4,
-    liked: false,
-  },
-
-  {
-    id: '1',
-    user: 'User.Example',
-    username: '@user.example',
-    content: 'this is an edited Tweet.\nwe’re testing it.',
-    editedAt: 'Last edited 8:55 AM · 09/01/22',
-    likes: 4,
-    liked: false,
-  },
-  {
-    id: '2',
-    user: 'User.Example',
-    username: '@user.example',
-    content: 'this is an edited Tweet.\nwe’re testing it.',
-    editedAt: 'Last edited 8:55 AM · 09/01/22',
-    likes: 4,
-    liked: false,
-  },
-
-  {
-    id: '1',
-    user: 'User.Example',
-    username: '@user.example',
-    content: 'this is an edited Tweet.\nwe’re testing it.',
-    editedAt: 'Last edited 8:55 AM · 09/01/22',
-    likes: 4,
-    liked: false,
-  },
-  {
-    id: '2',
-    user: 'User.Example',
-    username: '@user.example',
-    content: 'this is an edited Tweet.\nwe’re testing it.',
-    editedAt: 'Last edited 8:55 AM · 09/01/22',
-    likes: 4,
-    liked: false,
-  },
-
-  {
-    id: '1',
-    user: 'User.Example',
-    username: '@user.example',
-    content: 'this is an edited Tweet.\nwe’re testing it.',
-    editedAt: 'Last edited 8:55 AM · 09/01/22',
-    likes: 4,
-    liked: false,
-  },
-  {
-    id: '2',
-    user: 'User.Example',
-    username: '@user.example',
-    content: 'this is an edited Tweet.\nwe’re testing it.',
-    editedAt: 'Last edited 8:55 AM · 09/01/22',
-    likes: 4,
-    liked: false,
-  },
-
-  {
-    id: '1',
-    user: 'User.Example',
-    username: '@user.example',
-    content: 'this is an edited Tweet.\nwe’re testing it.',
-    editedAt: 'Last edited 8:55 AM · 09/01/22',
-    likes: 4,
-    liked: false,
-  },
-  {
-    id: '2',
-    user: 'User.Example',
-    username: '@user.example',
-    content: 'this is an edited Tweet.\nwe’re testing it.',
-    editedAt: 'Last edited 8:55 AM · 09/01/22',
-    likes: 4,
-    liked: false,
-  },
-
-  {
-    id: '1',
-    user: 'User.Example',
-    username: '@user.example',
-    content: 'this is an edited Tweet.\nwe’re testing it.',
-    editedAt: 'Last edited 8:55 AM · 09/01/22',
-    likes: 4,
-    liked: false,
-  },
-  {
-    id: '2',
-    user: 'User.Example',
-    username: '@user.example',
-    content: 'this is an edited Tweet.\nwe’re testing it.',
-    editedAt: 'Last edited 8:55 AM · 09/01/22',
-    likes: 4,
-    liked: false,
-  },
-
-  {
-    id: '1',
-    user: 'User.Example',
-    username: '@user.example',
-    content: 'this is an edited Tweet.\nwe’re testing it.',
-    editedAt: 'Last edited 8:55 AM · 09/01/22',
-    likes: 4,
-    liked: false,
-  },
-  {
-    id: '2',
-    user: 'User.Example',
-    username: '@user.example',
-    content: 'this is an edited Tweet.\nwe’re testing it.',
-    editedAt: 'Last edited 8:55 AM · 09/01/22',
-    likes: 4,
-    liked: false,
-  },
-];
+const initialTweets = generateTweets();
 
 export default function App() {
   const [tweets, setTweets] = useState(initialTweets);
+  const [searchText, setSearchText] = useState('');
   const [activeScreen, setActiveScreen] = useState('home');
+
+  // Filtrar tweets según el texto de búsqueda
+  const filteredTweets = tweets.filter(
+    (tweet) =>
+      tweet.user.toLowerCase().includes(searchText.toLowerCase()) ||
+      tweet.username.toLowerCase().includes(searchText.toLowerCase())
+  );
 
   const toggleLike = (id) => {
     setTweets((prevTweets) =>
       prevTweets.map((tweet) =>
         tweet.id === id
           ? {
-              ...tweet,
-              liked: !tweet.liked,
-              likes: tweet.liked ? tweet.likes - 1 : tweet.likes + 1,
-            }
+            ...tweet,
+            liked: !tweet.liked,
+            likes: tweet.liked ? tweet.likes - 1 : tweet.likes + 1,
+          }
           : tweet
       )
     );
@@ -215,15 +68,17 @@ export default function App() {
           style={styles.input}
           placeholder="Buscar en SafeTweet"
           placeholderTextColor="#aaa"
+          value={searchText}
+          onChangeText={setSearchText}
         />
       </View>
 
       {/* Título */}
       <Text style={styles.title}>Inicio</Text>
 
-      {/* Lista de tweets */}
+      {/* Lista de tweets filtrados */}
       <FlatList
-        data={tweets}
+        data={filteredTweets}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View style={styles.tweet}>
@@ -314,42 +169,16 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#fff', paddingTop: 50 },
-  searchBar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginHorizontal: 10,
-    backgroundColor: '#f1f1f1',
-    borderRadius: 25,
-    paddingHorizontal: 10,
-    height: 35,
-  },
+  searchBar: { flexDirection: 'row', alignItems: 'center', marginHorizontal: 10, backgroundColor: '#f1f1f1', borderRadius: 25, paddingHorizontal: 10, height: 35, },
   input: { flex: 1, paddingLeft: 10, fontSize: 14 },
   title: { fontSize: 20, fontWeight: 'bold', textAlign: 'center', marginVertical: 10 },
-  tweet: {
-    borderTopWidth: 0.5,
-    borderColor: '#ddd',
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-  },
+  tweet: { borderTopWidth: 0.5, borderColor: '#ddd', paddingHorizontal: 15, paddingVertical: 10, },
   userInfo: { flexDirection: 'row', alignItems: 'center', marginBottom: 5 },
   username: { fontWeight: 'bold' },
   handle: { color: 'gray', fontSize: 12 },
   content: { fontSize: 16, marginBottom: 5 },
   edited: { fontSize: 12, marginBottom: 5 },
   likes: { fontWeight: 'bold', marginBottom: 5 },
-  actions: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginTop: 5,
-  },
-  navBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    paddingVertical: 10,
-    borderTopWidth: 1,
-    borderColor: '#ddd',
-    backgroundColor: '#fff',
-    
-  },
+  actions: { flexDirection: 'row', justifyContent: 'space-around', marginTop: 5, },
+  navBar: { flexDirection: 'row', justifyContent: 'space-around', paddingVertical: 10, borderTopWidth: 1, borderColor: '#ddd', backgroundColor: '#fff', },
 });
-

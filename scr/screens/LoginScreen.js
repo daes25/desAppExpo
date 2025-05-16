@@ -15,20 +15,16 @@ export default function LoginScreen({ navigation }) {
 
 
   const handleLogin = () => {
-    // Buscar el usuario por correo electrónico
-    obtenerUsuarioPorNombre(username, (user) => {
-      if (user) {
-        // Verificar que la contraseña coincida
-        if (user.password === password) {
-          navigation.navigate('Home');
-        } else {
-          Alert.alert('Error', 'Contraseña incorrecta');
-        }
-      } else {
-        Alert.alert('Error', 'Usuario no encontrado');
-      }
-    });
+    const userPredefinido = 'Admin';
+    const passwordPredefinida = '1234';
+  
+    if (username === userPredefinido && password === passwordPredefinida) {
+      navigation.navigate('Home');
+    } else {
+      Alert.alert('Error', 'Usuario o contraseña incorrectos');
+    }
   };
+  
 
   const handleRegister = () => {
     if (!email || !newUsername || !newPassword) {
