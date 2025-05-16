@@ -9,7 +9,7 @@ const generateTweets = () => {
       id: `${i}`,
       user: `User${i}`,
       username: `@user${i}`,
-      content: `Este es el tweet número ${i}. Estamos haciendo una prueba de scroll.`,
+      content: `Bienvenido a nuestra app, sientete seguro de navegar.`,
       editedAt: `Last edited 8:55 AM · 09/01/22`,
       likes: Math.floor(Math.random() * 100),
       liked: false,
